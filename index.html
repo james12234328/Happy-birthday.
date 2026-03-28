@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Khenti 🎉</title>
+<style>
+:root{
+--bg:#fff8f2;
+--card:rgba(255,253,251,0.86);
+--accent:#ff5d8f;
+--text:#5c3a3a;
+--shadow:0 20px 45px rgba(168,99,99,0.18);
+}
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+min-height:100vh;
+font-family:"Trebuchet MS",sans-serif;
+color:var(--text);
+text-align:center;
+overflow-x:hidden;
+position:relative;
+background:
+linear-gradient(180deg,#fff8f2 0%,#fff2f6 100%);
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:url("photo4.jpg") center/cover no-repeat;
+opacity:0.2;
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:linear-gradient(rgba(255,248,242,0.7),rgba(255,252,248,0.82));
+z-index:-1;
+}
+
+.page{
+width:min(92%,860px);
+margin:0 auto;
+padding:32px 0 48px;
+}
+
+.hero{
+background:var(--card);
+backdrop-filter:blur(8px);
+border:1px solid rgba(255,255,255,0.65);
+border-radius:28px;
+padding:28px 20px 24px;
+box-shadow:var(--shadow);
+position:relative;
+overflow:hidden;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:auto -40px -60px auto;
+width:220px;
+height:220px;
+background:url("photo4.jpg") center/cover no-repeat;
+opacity:0.16;
+filter:blur(1px);
+border-radius:28px;
+transform:rotate(-8deg);
+pointer-events:none;
+}
+
+h1{
+margin:0 0 12px;
+font-size:clamp(2rem,5vw,3.4rem);
+color:var(--accent);
+animation:glow 2s infinite alternate;
+position:relative;
+z-index:1;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px rgba(255,93,143,0.25);}
+to{text-shadow:0 0 24px rgba(255,93,143,0.45);}
+}
+
+#msg{
+max-width:680px;
+margin:0 auto 18px;
+font-size:1.05rem;
+line-height:1.8;
+min-height:96px;
+position:relative;
+z-index:1;
+}
+
+.main-img{
+width:min(100%,340px);
+border-radius:22px;
+margin:12px 0 18px;
+border:6px solid rgba(255,255,255,0.8);
+box-shadow:0 14px 30px rgba(120,76,76,0.16);
+position:relative;
+z-index:1;
+}
+
+button{
+padding:12px 28px;
+background:linear-gradient(135deg,var(--accent),#ff8a7a);
+border:none;
+border-radius:999px;
+color:white;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(255,93,143,0.28);
+position:relative;
+z-index:1;
+}
+
+#modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(92,58,58,0.38);
+backdrop-filter:blur(5px);
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.modal-card{
+width:min(92vw,420px);
+background:rgba(255,253,251,0.96);
+border-radius:28px;
+padding:20px;
+box-shadow:var(--shadow);
+}
+
+#modal h2{
+margin:0 0 14px;
+color:var(--accent);
+}
+
+#modal img{
+width:100%;
+max-width:350px;
+border-radius:20px;
+border:5px solid rgba(255,216,228,0.9);
+box-shadow:0 12px 24px rgba(120,76,76,0.16);
+}
+
+.heart{
+position:fixed;
+top:-10px;
+font-size:20px;
+animation:fall linear infinite;
+pointer-events:none;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<section class="hero">
+<h1>🎉 Happy Birthday Khenti (Sanjana) 🎉</h1>
+<p id="msg"></p>
+
+<img src="photo1.jpg.jpeg" class="main-img" alt="Birthday Photo" onerror="this.src='photo4.jpg'">
+
+<button type="button" onclick="openModal()">Click Me 🎉</button>
+</section>
+</div>
+
+<div id="modal" onclick="closeModal(event)">
+<div class="modal-card">
+<h2>💖 Tu meri sabse special hai ❤️</h2>
+<img id="slide" src="photo1.jpg.jpeg" alt="Birthday Slideshow" onerror="this.src='photo1.jpg.jpeg'">
+</div>
+</div>
+
+<audio id="music" loop autoplay>
+<source src="Muskurati_Raho.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const text="मेरी प्यारी छोटी बहन खेंटी 💖 को जन्मदिन की ढेर सारी शुभकामनाएं! 🎂 तुम हमेशा ऐसे ही मुस्कुराती रहो और तुम्हारी हर ख्वाहिश पूरी हो। तुम मेरे लिए दुनिया की सबसे बड़ी खुशी हो। बहुत सारा प्यार! ❤️";
+const music=document.getElementById("music");
+const photos=["photo1.jpg.jpeg","photo2.jpg.jpeg","photo3.jpg.jpeg"];
+let i=0;
+let index=0;
+let slideshowStarted=false;
+let heartsStarted=false;
+
+function type(){
+if(i<text.length){
+document.getElementById("msg").innerHTML+=text[i];
+i++;
+setTimeout(type,40);
+}
+}
+
+function startMusic(){
+music.volume=0.65;
+const playAttempt=music.play();
+if(playAttempt&&typeof playAttempt.catch==="function"){
+playAttempt.catch(()=>{});
+}
+}
+
+function openModal(){
+const modal=document.getElementById("modal");
+modal.style.display="flex";
+startMusic();
+
+if(!slideshowStarted){
+slideshowStarted=true;
+setInterval(()=>{
+index=(index+1)%photos.length;
+document.getElementById("slide").src=photos[index];
+},2000);
+}
+
+if(!heartsStarted){
+heartsStarted=true;
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},240);
+}
+}
+
+function closeModal(event){
+if(event.target.id==="modal"){
+document.getElementById("modal").style.display="none";
+}
+}
+
+window.addEventListener("load",startMusic);
+window.addEventListener("click",startMusic,{once:true});
+window.addEventListener("touchstart",startMusic,{once:true});
+
+type();
+</script>
+</body>
+</html>
